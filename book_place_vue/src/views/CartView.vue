@@ -1,19 +1,16 @@
 <template>
-    <div>
-      <HeaderComponent></HeaderComponent>  
-    </div>
-
+    <HeaderComponent></HeaderComponent>
+    <BackButtonComponent></BackButtonComponent>
     <div class="book_container">
-        <BookComponent v-for="(book, index) in books" :key="index" :book="book" view="home"></BookComponent>
+        <BookComponent v-for="(book, index) in books" :key="index" :book="book" view="cart"></BookComponent>
     </div>
-
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import {ref} from 'vue';
 import HeaderComponent from '@/components/HeaderComponent.vue';
+import BackButtonComponent from '@/components/BackButtonComponent.vue';
 import BookComponent from '@/components/BookComponent.vue';
-
 const books = [
   {
     name: 'Book 1',
@@ -82,4 +79,5 @@ const books = [
 </script>
 
 <style scoped>
+
 </style>

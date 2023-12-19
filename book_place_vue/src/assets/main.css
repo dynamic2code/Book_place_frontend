@@ -55,10 +55,21 @@ button{
   font-weight: normal;
   font-style: normal;
 }
-
+.icon{
+  width: 40px;
+  height: 40px;
+  margin: 10px;
+  /* background-color: black; */
+}
+.book_container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 10px;
+}
 @media (hover: hover) {
   a:hover {
-    background-color: blue;
+    /* background-color: blue; */
     /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  */
   }
 }

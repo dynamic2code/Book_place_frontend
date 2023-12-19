@@ -4,7 +4,7 @@ import StepsComponent from './StepsComponent.vue';
 </script>
 
 <template>
-  <div class="body">
+  <div class="">
     <header>
       <div>
         <span class="heading2">Book place</span>
@@ -252,12 +252,6 @@ header{
   border-bottom-right-radius:30%; */
 }
 
-.icon{
-  width: 60px;
-  height: 60px;
-  margin: 30px;
-  /* background-color: black; */
-}
 @media only screen and (max-width: 768px){
   #div1{
     display: flex;

@@ -1,17 +1,15 @@
 <template>
-    <div>
-      <HeaderComponent></HeaderComponent>  
-    </div>
-
+    <HeaderComponent></HeaderComponent>
+    <BackButtonComponent></BackButtonComponent>
     <div class="book_container">
-        <BookComponent v-for="(book, index) in books" :key="index" :book="book" view="home"></BookComponent>
+        <BookComponent v-for="(book, index) in books" :key="index" :book="book" time="1230"></BookComponent>
     </div>
-
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import {ref} from 'vue';
 import HeaderComponent from '@/components/HeaderComponent.vue';
+import BackButtonComponent from '@/components/BackButtonComponent.vue';
 import BookComponent from '@/components/BookComponent.vue';
 
 const books = [
