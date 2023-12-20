@@ -2,31 +2,26 @@
     <BackButtonComponent></BackButtonComponent>
     <div class="body">
       <div class="form_container">
-        <div class="icon">
-          <img src="" alt="">
-          <span>Book Place</span>
+        <div class="form_brand">
+          <span class="heading2" >Book Place</span>
         </div>
-        <span class="direction">Borrow {{ book.name }}</span>
-        <form @submit.prevent="borrow">
+        <span class="direction">ADD ADMIN</span>
+        <form @submit.prevent="add_admin">
+          <input type="name" id="name" v-model="name" placeholder="Your name" required />
           <input type="email" id="email" v-model="email" placeholder="Your email" required />
           <input type="password" id="password" v-model="password" placeholder="Your password" required />
-          <button class="call_to_action" type="submit">Login</button>
+          <button class="call_to_action" type="submit">Register</button>
         </form>
         <button>
           <img src="" alt="">
         </button> 
-        
-        <span class="direction">New here? Signup</span>
       </div>
   
     </div>
   </template>
   
   <script setup>
-  const url = defineProps({
-    book: Object,
-  })
-  
+  const url = defineProps(["url"])
   import BackButtonComponent from './BackButtonComponent.vue';
   import { ref } from 'vue';
   
@@ -34,17 +29,19 @@
   
   const router = useRouter();
   
+  const name = ref('')
   const email = ref('');
   const password = ref('');
   
-  const borrow = async () => {
+  const add_admin = async () => {
     try {
-      const response = await fetch(book.url, {
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          name: name.value,
           email: email.value,
           password: password.value,
         }),
@@ -53,7 +50,7 @@
       if (response.ok) {
         // Handle the success scenario, e.g., redirect
         console.log('Login successful');
-        router.push('/home');
+        router.push('/admin-home');
       } else {
         // Handle the failure scenario, e.g., display an error message
         console.error('Login failed:', response.statusText);

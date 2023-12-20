@@ -24,7 +24,10 @@
     </div>
   </template>
   
-  <script setup>
+<script setup>
+import { useRouter } from 'vue-router';
+const router = useRouter();
+
  const obj = defineProps({
       book: Object,
       view: String,
@@ -71,7 +74,7 @@ const navigateToAction = (action) => {
     case 'borrow':
       // Replace 'borrow' with the name or path of the 'borrow' route
       console.log('clicked')
-      router.push('/library');
+      router.push('/borrow-form');
       break;
     case 'add_to_cart':
       // Replace 'add_to_cart' with the name or path of the 'add_to_cart' route
@@ -102,6 +105,7 @@ const navigateToAction = (action) => {
     z-index: 2;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: 50ms;
+    margin-bottom: 10px;
   }
   
   #book_image_holder {

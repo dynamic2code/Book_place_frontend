@@ -2,8 +2,7 @@
 
 @font-face {
   font-family: 'inter';
-  src: url('~@/assets/fonts/Inter/static/Inter-Black.ttf') format('truetype'),
-       url('~@/assets/fonts/Inter/static/Inter-Bold.ttf') format('truetype');
+  src:url('~@/assets/fonts/Inter/static/Inter-Black.ttf') format('ttf');
 }
 
 #app {
@@ -67,6 +66,15 @@ button{
   justify-content: space-between;
   margin-top: 10px;
 }
+.form_brand{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.graph_container{
+  height: 500px;
+  width: 50%;
+}
 @media (hover: hover) {
   a:hover {
     /* background-color: blue; */
@@ -74,15 +82,8 @@ button{
   }
 }
 
-@media (min-width: 1024px) {
-  /* body {
-    display: flex;
-    place-items: center;
-  } */
-
-  /* #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  } */
+@media (max-width: 784px) {
+.graph_container{
+  width: 100%;
+}
 }
