@@ -1,6 +1,6 @@
 <template>
     <AdminHeaderComponent></AdminHeaderComponent>
-    <div class="book_container">
+    <div class="book_container body">
         <AdminHomeComponent :go_to="go_to"></AdminHomeComponent>
         <div id="admin_controls">
           <AdminButtonComponent :buttons="buttons"></AdminButtonComponent>
@@ -25,9 +25,9 @@ const go_to = [
 ];
 
 const buttons =[
-  {route:'/add-book',Image: 'left.png', name:'add book'},
-  {route:'/add-user',Image: 'book_place_vue/src/assets/images/left.png', name:'add user'},
-  {route:'/add-admin',Image: 'left.png', name:'add admin'},
+  {route:'/add-book',image: 'open-book.png', name:'add book'},
+  {route:'/add-user',image: 'user.png', name:'add user'},
+  {route:'/add-admin',image: 'admin.png', name:'add admin'},
 ]
 
 </script>
@@ -35,8 +35,11 @@ const buttons =[
 <style scoped>
 #admin_controls{
   position: fixed;
+  padding: 1%;
   bottom: 0;
   right: 0;
+  /* background-color: black; */
+  z-index: 6;
 
 }
 </style>

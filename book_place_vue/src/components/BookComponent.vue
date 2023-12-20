@@ -144,7 +144,7 @@ const navigateToAction = (action) => {
   /* Hover effect to expand details */
   #holder:hover{
     z-index: 4;
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
   #holder:hover .details {
     /* max-height: 70px; */

@@ -1,7 +1,7 @@
 <template>
     <AdminHeaderComponent></AdminHeaderComponent>
-    <BackButtonComponent></BackButtonComponent>
-    <div class="book_container">
+    <div class="book_container body">
+      <BackButtonComponent></BackButtonComponent>
         <AdminComponent :admins="admins"></AdminComponent>
     </div>
 

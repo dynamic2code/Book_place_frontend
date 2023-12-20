@@ -1,15 +1,18 @@
 <template>
     <HeaderComponent></HeaderComponent>
-    <BackButtonComponent></BackButtonComponent>
-    <div id="image_holder">
-        <img src="./assets/images/book.image" alt="">
+    <div class="book_container body">
+        <BackButtonComponent></BackButtonComponent>
+        <div id="image_holder">
+            <img src="./assets/images/book.image" alt="">
+        </div>
+        <div id="detail_holder">
+            <span class="heading1">{{book.name}}</span>
+            <span class="heading2">{{book.category }}</span>
+            <span class="heading2">{{book.sub_category }}</span>
+            <span class="normal_text">{{book.details}}</span>
+        </div>        
     </div>
-    <div id="detail_holder">
-        <span class="heading1">{{book.name}}</span>
-        <span class="heading2">{{book.category }}</span>
-        <span class="heading2">{{book.sub_category }}</span>
-        <span class="normal_text">{{book.details}}</span>
-    </div>
+
 </template>
 
 <script setup>

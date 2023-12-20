@@ -13,7 +13,7 @@
   div{
       /* background-color: aquamarine; */
       margin: 10px;
-      width: 40px;
+      width: 90%;
   }
   button{
       width: 30px;

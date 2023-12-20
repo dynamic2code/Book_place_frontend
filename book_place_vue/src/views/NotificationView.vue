@@ -1,7 +1,8 @@
 <template>
     <HeaderComponent></HeaderComponent>
-    <BackButtonComponent></BackButtonComponent>
-    <div class="book_container">
+
+    <div class="book_container body">
+        <BackButtonComponent></BackButtonComponent>      
         <NotificationComponent v-for="(notify, index) in notifications" :key="index" :notification="notify"></NotificationComponent>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
     <HeaderComponent></HeaderComponent>
-    <BackButtonComponent></BackButtonComponent>
-    <div class="book_container">
+    <div class="book_container body">
+      <BackButtonComponent></BackButtonComponent>
         <BookComponent v-for="(book, index) in books" :key="index" :book="book" time="1230"></BookComponent>
     </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
     <AdminHeaderComponent></AdminHeaderComponent>
-    <BackButtonComponent></BackButtonComponent>
-    <div class="book_container">
+    <div class="book_container body">
+        <BackButtonComponent></BackButtonComponent>
         <PieChartComponent></PieChartComponent>
         <BarChartComponent></BarChartComponent>
         <LineChartComponent></LineChartComponent>

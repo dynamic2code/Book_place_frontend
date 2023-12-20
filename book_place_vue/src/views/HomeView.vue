@@ -1,9 +1,6 @@
 <template>
-    <div>
-      <HeaderComponent></HeaderComponent>  
-    </div>
-
-    <div class="book_container">
+    <HeaderComponent></HeaderComponent>  
+    <div class="book_container body">
         <BookComponent v-for="(book, index) in books" :key="index" :book="book" view="home"></BookComponent>
     </div>
 
