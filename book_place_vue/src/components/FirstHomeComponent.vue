@@ -4,12 +4,6 @@
         <span id="span1" class="heading15">Want to immerse yourself in a world of knowledge, adventure, and imagination? </span>
         <span class="heading1">Explore our library and <span style="color:#0099ff;">experiences endless</span> possibilities.
         </span>
-        <div id="category_showcase">
-          <span class="normal_text">categories:</span>
-          <div id="category_holder">
-            <CategoryComponent v-for="index in 10" :key="index" :data="someData" />
-          </div>
-        </div>
         
       </div>
 
