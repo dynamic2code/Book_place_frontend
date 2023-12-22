@@ -3,7 +3,7 @@
     <div class="book_container body">
         <BackButtonComponent></BackButtonComponent>
         <div id="image_holder">
-            <img src="./assets/images/book.image" alt="">
+            <img src="@/assets/images/book1.png" alt="">
         </div>
         <div id="detail_holder">
             <span class="heading1">{{book.name}}</span>

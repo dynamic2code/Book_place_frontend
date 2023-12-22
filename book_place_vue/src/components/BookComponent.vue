@@ -4,7 +4,7 @@
         <RouterLink to="/book">
             <div id="scrollable">
                 <div id="book_image_holder">
-                    <img id="book_image" :src="book.image" alt="">
+                    <img id="book_image" src="@/assets/images/book1.png" alt="">
                 </div>
                 <div id="detail_holder" class="details">
                     <span id="name" class="heading2">{{book.name }}</span>
@@ -112,6 +112,9 @@ const navigateToAction = (action) => {
     width: 100%;
     height: 200px;
     background-color: brown;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   #detail_holder {
