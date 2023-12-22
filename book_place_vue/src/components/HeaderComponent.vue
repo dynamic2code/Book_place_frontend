@@ -3,7 +3,7 @@
         <div id="header_container">
             <div>
                 <router-link to="/home">
-                    <span class="heading2">Book Place</span>                
+                    <span class="heading15">Book Place</span>                
                 </router-link>
             </div>
             <form @submit.prevent="handleSubmit" class="search-container">

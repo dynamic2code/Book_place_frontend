@@ -26,11 +26,12 @@ button{
 }
 .body{
   width: 90%;
+  /* background-color: blue; */
 }
 .call_to_action{
   min-width: 80px;
   height: 40px;
-  background-color: blue;
+  background-color: #0099ff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -46,6 +47,12 @@ button{
   font-style: normal;
   font-size: 3em;
 }
+.heading15{
+  font-family: 'inter', sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 1.5em;
+}
 .heading2{
   font-family: 'inter', sans-serif;
   font-weight: bold;
@@ -55,6 +62,7 @@ button{
   font-family: 'inter', sans-serif;
   font-weight: normal;
   font-style: normal;
+  font-size: 1em;
 }
 .icon{
   width: 40px;
@@ -90,6 +98,44 @@ button{
   top: 0;
   z-index: 6;
 }
+.left_div{
+  height: 100%;
+  width: 50%;
+  /* background-color: blueviolet; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.right_div{
+  height: 100%;
+  width: 50%;
+  /* background-color: rgb(226, 43, 52); */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.image{
+  display: block;
+  width: auto;
+  height: 100%;
+  /* background-color: aqua; */
+  /* border-top-right-radius:30px; */
+  /* border-top-left-radius: 50%;
+  border-top-right-radius: 50%; */
+
+}
+.holder{
+  min-height: 500px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: blueviolet; */
+}
 @media (hover: hover) {
   a:hover {
     /* background-color: blue; */
@@ -98,7 +144,15 @@ button{
 }
 
 @media (max-width: 784px) {
-.graph_container{
-  width: 100%;
-}
+  .graph_container{
+    width: 100%;
+  }
+  .holder{
+    min-height: 500px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: blueviolet; */
+  }
 }

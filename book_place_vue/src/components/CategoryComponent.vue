@@ -12,7 +12,7 @@
     min-width: 80px;
     height: 30px;
     color: white;
-    background-color: blue;
+    background-color: #0099ff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
     display: flex;
     justify-content: center;

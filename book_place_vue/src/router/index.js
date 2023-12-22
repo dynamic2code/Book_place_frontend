@@ -38,7 +38,7 @@ const router = createRouter({
       component: LoginView,
     },
     {
-      path: '/admin_login',
+      path: '/admin-login',
       name: 'admin_login',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route

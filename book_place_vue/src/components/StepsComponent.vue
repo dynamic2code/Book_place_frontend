@@ -4,8 +4,8 @@
             <img class="icon" :src='src' alt="">
         </div> -->
         <div class="step_text"> 
-            <span class="heading2">{{step}}</span>
-            <span class="normal-text">{{details}}</span>
+            <span class="heading15" style="color: #0099ff;">{{step}}</span>
+            <span class="normal_text">{{details}}</span>
         </div>
     </div>
 </template>
@@ -17,25 +17,28 @@ defineProps(['step','details'])
 <style scoped>
 .step{
   width: 300px;
-  min-height: 100px;
-  max-height: 200px;
-  height: auto;
+  height: 300px;
   background-color: white;
-  margin: 10px;
+  margin: 20px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 5px;
+  border-radius: 20px;
 
 }
 .step_image{
   width: 10%;
 }
+span{
+  margin-bottom: 20px;
+}
 .step_text{
   display: flex;
   flex-direction: column;
+}
+@media (max-width: 784px) {
 }
 </style>
