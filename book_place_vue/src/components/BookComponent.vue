@@ -1,7 +1,7 @@
 <template>
 
-    <div class="book" id="holder">
-        <RouterLink to="/book">
+    <div v-for="(book, index) in books" :key="index" class="book" id="holder">
+        <RouterLink :to="{ name: 'book', query: { id: book.id } }">
             <div id="scrollable">
                 <div id="book_image_holder">
                     <img id="book_image" src="@/assets/images/book1.png" alt="">
@@ -14,10 +14,10 @@
             </div>        
         </RouterLink>
         <div id="buttons">
-            <button @click="navigateToAction(button1.action)">
+            <button @click="navigateToAction(button1.action, book)">
             <span class="heading2">{{ button1.text }}</span>
             </button>
-            <button @click="navigateToAction(button2.action)">
+            <button @click="navigateToAction(button2.action, book)">
             <span class="heading2">{{ button2.text }}</span>
             </button>
         </div>
@@ -29,7 +29,7 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 
  const obj = defineProps({
-      book: Object,
+      books: Object,
       view: String,
       time: String
   })
@@ -68,27 +68,24 @@ const router = useRouter();
   return buttons;
 }
 
-const navigateToAction = (action) => {
-  // Handle different actions
+const navigateToAction = (action, book) => {
   switch (action) {
     case 'borrow':
-      // Replace 'borrow' with the name or path of the 'borrow' route
-      console.log('clicked')
-      router.push('/borrow-form');
+      // console.log("book id i component",book.id)
+      router.push({
+        name: 'borrow_form',
+        query: { id: book.id }
+      });
       break;
     case 'add_to_cart':
-      // Replace 'add_to_cart' with the name or path of the 'add_to_cart' route
-      router.push({name:'lib'});
+      console.log("added to cart")
       break;
     case 'remove':
-      // Replace 'remove' with the name or path of the 'remove' route
-      router.push({name:'lib'});
+      router.push({ name: 'lib' });
       break;
     case 'return':
-      // Replace 'return' with the name or path of the 'return' route
-      router.push({name:'lib'});
+      router.push({ name: 'lib' });
       break;
-    // Handle other actions as needed
     default:
       break;
   }

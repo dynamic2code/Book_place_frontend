@@ -1,5 +1,5 @@
 <template>
-    <BorrowFormComponent url=""></BorrowFormComponent>
+    <BorrowFormComponent></BorrowFormComponent>
 </template>
 
 <script setup>

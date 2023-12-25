@@ -1,6 +1,6 @@
 <template>
     <div  v-for="(book, index) in books" :key="index" id="notification_container"> 
-        <RouterLink to="/book" id="split">
+        <RouterLink :to="{ name: 'book', query: { id: book.id } }" id="split">
             <div id="image">
                 <img :src= "book.image" alt="" />
             </div>        
@@ -62,6 +62,11 @@ const edit = (requestId) => {
     width: 30%;
     height: 100%;
     background-color: brown;
+}
+#image img{
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 #text{
     width: 70%;

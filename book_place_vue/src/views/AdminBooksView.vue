@@ -9,26 +9,27 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import AdminHeaderComponent from '@/components/AdminHeaderComponent.vue';
 import BackButtonComponent from '@/components/BackButtonComponent.vue';
 import AdminBookComponent from '@/components/AdminBookComponent.vue';
 
-const books = [
-  {
-    id: 1,
-    name: 'The Great Book',
-    image: 'path/to/great_book.jpg', // Replace with actual image path
-    created_at: '2023-01-01 12:34:56', // Replace with actual timestamp
-    email: 'john@example.com',
-  },
-  {
-    id: 2,
-    name: 'Adventure Chronicles',
-    image: 'path/to/adventure_chronicles.jpg', // Replace with actual image path
-    created_at: '2023-01-02 10:45:30', // Replace with actual timestamp
-    email: 'jane@example.com',
-  },
-];
+const books = ref([]);
+
+// Fetch books from the API
+const fetchBooks = async () => {
+  try {
+    const response = await fetch('http://127.0.0.1:8000/api/v1/books');
+    const data = await response.json();
+    
+    // Update the books ref with the fetched data
+    books.value = data;
+  } catch (error) {
+    console.error('Error fetching books:', error);
+  }
+};
+// Call fetchBooks when the component is mounted
+onMounted(fetchBooks);
 </script>
 
 <script scoped>

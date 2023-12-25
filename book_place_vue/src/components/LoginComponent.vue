@@ -25,7 +25,7 @@
   <script setup>
   const url = defineProps(["url"])
   import BackButtonComponent from './BackButtonComponent.vue';
-  import { ref } from 'vue';
+  import { ref, onMounted } from 'vue';
   
   import { useRouter } from 'vue-router';
   
@@ -36,7 +36,7 @@
   
   const login = async () => {
     try {
-      const response = await fetch(url, {
+      const response = await fetch('http://127.0.0.1:8000/api/v1/admin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,6 +60,7 @@
       console.error('Network error:', error.message);
     }
   };
+  onMounted(login);
   </script>
   
   <style scoped>

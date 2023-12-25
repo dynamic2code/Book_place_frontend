@@ -35,7 +35,7 @@
   
   const add_admin = async () => {
     try {
-      const response = await fetch(url, {
+      const response = await fetch('http://127.0.0.1:8001/api/v1/admin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -46,20 +46,22 @@
           password: password.value,
         }),
       });
-  
+
       if (response.ok) {
         // Handle the success scenario, e.g., redirect
-        console.log('Login successful');
+        console.log('Admin created successfully');
         router.push('/admin-home');
       } else {
         // Handle the failure scenario, e.g., display an error message
-        console.error('Login failed:', response.statusText);
+        const errorData = await response.json();
+        console.error('Admin creation failed:', errorData.message);
       }
     } catch (error) {
       // Handle network errors
       console.error('Network error:', error.message);
     }
   };
+
   </script>
   
   <style scoped>

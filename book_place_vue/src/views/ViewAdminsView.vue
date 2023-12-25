@@ -8,24 +8,26 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import AdminHeaderComponent from '@/components/AdminHeaderComponent.vue';
 import BackButtonComponent from '@/components/BackButtonComponent.vue';
 import AdminComponent from '@/components/AdminComponent.vue';
 
-const admins = [
-  {
-    id: 1,
-    name: 'John Doe',
-    email: 'john@example.com',
-    created_at: '2023-01-01 12:34:56', // Replace with actual timestamp
-  },
-  {
-    id: 2,
-    name: 'Jane Doe',
-    email: 'jane@example.com',
-    created_at: '2023-01-02 10:45:30', // Replace with actual timestamp
-  },
-];
+const admins = ref([]);
+// Fetch books from the API
+const fetchAdmins = async () => {
+  try {
+    const response = await fetch('http://127.0.0.1:8000/api/v1/admin');
+    const data = await response.json();
+    
+    // Update the books ref with the fetched data
+    admins.value = data;
+  } catch (error) {
+    console.error('Error fetching books:', error);
+  }
+};
+// Call fetchBooks when the component is mounted
+onMounted(fetchAdmins);
 </script>
 
 <script scoped>

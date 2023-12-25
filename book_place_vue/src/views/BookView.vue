@@ -18,14 +18,35 @@
 <script setup>
 import HeaderComponent from '@/components/HeaderComponent.vue';
 import BackButtonComponent from '@/components/BackButtonComponent.vue';
-const book = {
-    name: 'The Enigmatic Mystery',
-    category: 'Mystery',
-    sub_category:'something',
-    details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla condimentum, est eu interdum malesuada, mauris turpis elementum nisl, vitae imperdiet risus justo et purus. Sed vel dapibus metus. Quisque tristique hendrerit enim, vel accumsan felis fermentum vel. Suspendisse potenti. Maecenas euismod enim in ipsum venenatis, in laoreet tortor pharetra. Proin posuere felis nec venenatis iaculis. Aenean euismod efficitur accumsan. Nulla facilisi. Morbi varius consectetur bibendum. Sed ut ligula eu metus imperdiet auctor. Ut facilisis dolor vel tincidunt cursus. Fusce vitae aliquam mauris. Morbi vel justo quis velit lacinia feugiat. Integer a arcu in turpis pharetra aliquet vel eu sem.',
-    image: 'books.jpeg',    
-}
+import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 
+const route = useRoute();
+const book = ref({
+  name: '',
+  category: '',
+  sub_category: '',
+  details: '',
+  image: '',
+});
+
+onMounted(async () => {
+  const bookId = route.query.id;
+  console.log('Book ID:', bookId); // Add this line for debugging
+  if (!bookId) {
+    console.error('Book ID is undefined');
+    return;
+  }
+
+  // Replace the following with your actual API endpoint to fetch book details
+  const response = await fetch(`http://127.0.0.1:8000/api/v1/books/${bookId}`);
+  if (response.ok) {
+    const data = await response.json();
+    book.value = data;
+  } else {
+    console.error('Failed to fetch book details');
+  }
+});
 </script>
 
 <style scoped>
@@ -34,6 +55,14 @@ const book = {
     height: 400px;
     background-color: brown;
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#image_holder img{
+    display: block;
+    width: auto;
+    height: 50%;
 }
 #detail_holder{
     display: flex;
@@ -42,4 +71,5 @@ const book = {
 #detail_holder > * {
   margin-bottom: 10px;
 }
+
 </style>
