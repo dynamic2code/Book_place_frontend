@@ -10,3 +10,32 @@ export const useCounterStore = defineStore('counter', () => {
 
   return { count, doubleCount, increment }
 })
+
+import { createStore } from 'vuex';
+
+const store = createStore({
+  state: {
+    user: null,
+    token: null,
+  },
+  mutations: {
+    setUser(state, user) {
+      state.user = user;
+    },
+    setToken(state, token) {
+      state.token = token;
+    },
+  },
+  actions: {
+    loginUser({ commit }, { user, token }) {
+      commit('setUser', user);
+      commit('setToken', token);
+    },
+  },
+  getters: {
+    getUser: (state) => state.user,
+    getToken: (state) => state.token,
+  },
+});
+
+export default store;

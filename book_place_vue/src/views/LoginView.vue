@@ -1,5 +1,5 @@
 <template>
-    <LoginComponent url=""></LoginComponent>
+    <LoginComponent  user=""></LoginComponent>
 </template>
 
 <script setup>

@@ -8,24 +8,35 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useStore } from 'vuex';
 import HeaderComponent from '@/components/HeaderComponent.vue';
 import BookComponent from '@/components/BookComponent.vue';
 
+const store = useStore();
+const token = store.getters.getToken;
 
-
-// Define a ref to store the books
 const books = ref([]);
 
 // Fetch books from the API
 const fetchBooks = async () => {
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/v1/books');
-    const data = await response.json();
-    
-    // Update the books ref with the fetched data
-    books.value = data;
+    const response = await fetch('http://127.0.0.1:8000/api/v1/books', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+
+      // Update the books ref with the fetched data
+      books.value = data;
+    } else {
+      console.error('Request failed:', response.statusText);
+    }
   } catch (error) {
-    console.error('Error fetching books:', error);
+    console.error('Network error:', error.message);
   }
 };
 

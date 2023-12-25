@@ -23,11 +23,32 @@
   </template>
   
   <script setup>
-  const url = defineProps(["url"])
+  import { defineProps } from 'vue';
   import BackButtonComponent from './BackButtonComponent.vue';
   import { ref, onMounted } from 'vue';
-  
   import { useRouter } from 'vue-router';
+  import { useStore } from 'vuex';
+
+  const store = useStore();
+  const props = defineProps({
+    user: String,
+  });
+
+  console.log(props.user);
+
+  let url;
+  let route;
+
+  if (props.user === 'admin') {
+    url = 'http://127.0.0.1:8000/api/v1/admin/login';
+    route ='/admin-home'
+  } else {
+    url = 'http://127.0.0.1:8000/api/v1/users/login';
+    route = '/home'
+  }
+
+
+
   
   const router = useRouter();
   
@@ -36,7 +57,8 @@
   
   const login = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/v1/admin', {
+      console.log(url)
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,8 +71,11 @@
   
       if (response.ok) {
         // Handle the success scenario, e.g., redirect
-        console.log('Login successful');
-        router.push('/home');
+        console.log(route)
+        const responseData = await response.json();
+        store.dispatch('loginUser', { user: responseData.user, token: responseData.token });
+        console.log('Login successful', responseData);
+        router.push(route);
       } else {
         // Handle the failure scenario, e.g., display an error message
         console.error('Login failed:', response.statusText);
@@ -60,7 +85,6 @@
       console.error('Network error:', error.message);
     }
   };
-  onMounted(login);
   </script>
   
   <style scoped>
