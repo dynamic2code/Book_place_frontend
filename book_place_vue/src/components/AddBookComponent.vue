@@ -38,6 +38,12 @@ import { useRouter } from 'vue-router';
 import config from '../config';
 
 const apiUrl = `${config.baseUrl}/books`;
+const token = localStorage.token
+
+const userJsonString = localStorage.user;
+const userObject = JSON.parse(userJsonString);
+const userId = userObject.id;
+
 const router = useRouter();
 
 const name = ref('');
@@ -52,6 +58,7 @@ const fileInput = ref(null);
 const addBook = async () => {
   try {
     const formData = new FormData();
+    formData.append('added_by', userId)
     formData.append('name', name.value);
     formData.append('publisher', publisher.value);
     formData.append('isbn', isbn.value);
@@ -63,6 +70,10 @@ const addBook = async () => {
 
     const response = await fetch(apiUrl, {
       method: 'POST',
+      headers: {
+          // 'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+      },
       body: formData,
     });
 

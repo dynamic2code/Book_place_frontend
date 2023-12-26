@@ -20,10 +20,32 @@
 defineProps({
     admins: Object
 })
+import config from '../config';
+
+const apiUrl = `${config.baseUrl}/admin`;
+const token = localStorage.token;
 
 const Delete = (requestId) => {
-  // Logic to handle approval
-  console.log(`Loan request with ID ${requestId} approved.`);
+    const deleteUrl = `${apiUrl}/${requestId}`;
+
+    // Make the DELETE request with the authentication token
+    fetch(deleteUrl, {
+    method: 'DELETE',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, // Include the token in the Authorization header
+    },
+    })
+    .then(response => {
+    if (!response.ok) {
+        throw new Error(`Failed to delete admin with ID ${requestId}`);
+    }
+    console.log(`admin with ID ${requestId} deleted successfully.`);
+    location.reload();
+    })
+    .catch(error => {
+    console.error(error.message);
+    });
 };
 
 const Suspend = (requestId) => {

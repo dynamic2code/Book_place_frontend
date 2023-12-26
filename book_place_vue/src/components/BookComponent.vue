@@ -6,10 +6,8 @@
                 <div id="book_image_holder">
                     <img id="book_image" :src="book.image" alt="">
                 </div>
-                <div id="detail_holder" class="details">
-                    <span id="name" class="heading2">{{book.name }}</span>
-                    <span id="category" class="normal_text">{{book.category}}</span>
-                    <span id="details" class="normal_text">{{book.sub_category}}</span>
+                <div id="detail_holder" class="details">  
+                    <span id="category" class="normal_text"><span id="name" class="heading2">{{book.name }}</span> in {{book.category}} category {{book.sub_category}} sub-category</span>
                 </div>            
             </div>        
         </RouterLink>
@@ -27,6 +25,15 @@
 <script setup>
 import { useRouter } from 'vue-router';
 const router = useRouter();
+const token = localStorage.token;
+
+const userJsonString = localStorage.user;
+const userObject = JSON.parse(userJsonString);
+const userId = userObject.id;
+
+import config from '../config';
+
+const apiUrl = `${config.baseUrl}`;
 
  const obj = defineProps({
       books: Object,
@@ -68,7 +75,7 @@ const router = useRouter();
   return buttons;
 }
 
-const navigateToAction = (action, book) => {
+const navigateToAction = async (action, book) => {
   switch (action) {
     case 'borrow':
       // console.log("book id i component",book.id)
@@ -77,8 +84,32 @@ const navigateToAction = (action, book) => {
         query: { id: book.id }
       });
       break;
+
     case 'add_to_cart':
-      console.log("added to cart")
+      try {
+          const response = await fetch(`${apiUrl}/cart`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              bookId: book.id,
+              userId: userId
+            }),
+          });
+
+          if (response.ok) {
+            // Handle the success scenario, e.g., display a success message
+            console.log('Added to Cart successfully');
+          } else {
+            // Handle the failure scenario, e.g., display an error message
+            console.error('Failed to add to Cart:', response.statusText);
+          }
+        } catch (error) {
+          // Handle network errors
+          console.error('Network error:', error.message);
+        }
       break;
     case 'remove':
       router.push({ name: 'lib' });
@@ -108,7 +139,7 @@ const navigateToAction = (action, book) => {
   #book_image_holder {
     width: 100%;
     height: 200px;
-    background-color: brown;
+    background-color: #0099ff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -122,8 +153,13 @@ const navigateToAction = (action, book) => {
   
   #detail_holder {
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
-    overflow: hidden; /* Hide content that exceeds max-height */
+    overflow: hidden;
+    margin-top: 10px;
+    margin-bottom: 10px;
+     /* Hide content that exceeds max-height */
   }
   
   .details {
@@ -143,7 +179,7 @@ const navigateToAction = (action, book) => {
     padding-left: 5%;
     padding-right: 5%;
     border-radius: 20px;
-    background-color: blue;
+    background-color: #0099ff;
     color: white;
   }
   

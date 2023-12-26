@@ -27,10 +27,36 @@
 defineProps({
     books: Object
 })
+import config from '../config';
+
+const apiUrl = `${config.baseUrl}/books`;
+
+const token = localStorage.token;
+
 
 const Delete = (requestId) => {
-  // Logic to handle approval
-  console.log(`Loan request with ID ${requestId} approved.`);
+    // Define the API endpoint for the specific book
+    const deleteUrl = `${apiUrl}/${requestId}`;
+
+    // Make the DELETE request with the authentication token
+    fetch(deleteUrl, {
+    method: 'DELETE',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, // Include the token in the Authorization header
+    },
+    })
+    .then(response => {
+    if (!response.ok) {
+        throw new Error(`Failed to delete book with ID ${requestId}`);
+    }
+    console.log(`Book with ID ${requestId} deleted successfully.`);
+    // Optionally handle success, e.g., redirect or update UI
+    })
+    .catch(error => {
+    console.error(error.message);
+    // Optionally handle errors, e.g., display an error message
+    });
 };
 
 const edit = (requestId) => {

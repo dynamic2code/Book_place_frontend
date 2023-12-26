@@ -20,10 +20,33 @@
 defineProps({
     users: Object
 })
+import config from '../config';
+
+const apiUrl = `${config.baseUrl}/users`;
+const token = localStorage.token;
 
 const Delete = (requestId) => {
-  // Logic to handle approval
-  console.log(`Loan request with ID ${requestId} approved.`);
+    // Define the API endpoint for the specific book
+    const deleteUrl = `${apiUrl}/${requestId}`;
+
+    // Make the DELETE request with the authentication token
+    fetch(deleteUrl, {
+    method: 'DELETE',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, // Include the token in the Authorization header
+    },
+    })
+    .then(response => {
+    if (!response.ok) {
+        throw new Error(`Failed to delete user with ID ${requestId}`);
+    }
+    console.log(`user with ID ${requestId} deleted successfully.`);
+    location.reload();
+    })
+    .catch(error => {
+    console.error(error.message);
+    });
 };
 
 const Suspend = (requestId) => {

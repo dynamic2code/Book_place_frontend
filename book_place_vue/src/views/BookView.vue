@@ -6,10 +6,11 @@
             <img :src=book.image alt="">
         </div>
         <div id="detail_holder">
-            <span class="heading1">{{book.name}}</span>
-            <span class="heading2">{{book.category }}</span>
-            <span class="heading2">{{book.subCategory }}</span>
-            <span class="normal_text">{{book.details}}</span>
+            <span class="heading1">Name {{book.name}}</span>
+            <span class="heading2">Publisher: {{book.publisher}}</span>
+            <span class="heading2">Category: {{book.category }}</span>
+            <span class="heading2">Sub Category: {{book.subCategory }}</span>
+            <span class="normal_text">{{book.description}}</span>
         </div>        
     </div>
 
@@ -23,6 +24,7 @@ import { useRoute } from 'vue-router';
 import config from '../config';
 
 const apiUrl = `${config.baseUrl}`;
+const token = localStorage.token;
 
 const route = useRoute();
 const book = ref({
@@ -43,12 +45,22 @@ onMounted(async () => {
 
   // Replace the following with your actual API endpoint to fetch book details
   const bookUrl = `${apiUrl}/books/${bookId}`;
-  const response = await fetch(bookUrl);
-  if (response.ok) {
-    const { data } = await response.json();
-    book.value = data;
-  } else {
-    console.error('Failed to fetch book details');
+  
+  try {
+    const response = await fetch(bookUrl, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json', // Add this if needed
+      },
+    });
+    if (response.ok) {
+      const { data } = await response.json();
+      book.value = data;
+    } else {
+      console.error('Failed to fetch book details');
+    }
+  } catch (error) {
+    console.error('An error occurred:', error);
   }
 });
 </script>

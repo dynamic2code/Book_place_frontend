@@ -1,7 +1,7 @@
 <template>
     <div id="admin_button_holder">
         <RouterLink v-for="(button, index) in buttons" :key="index" :to="button.route" class="admin_button">
-            <img class="icon" src="@/assets/images/cart.png" alt="">
+            <img class="icon" :src="button.image" alt="">
             <span class="normal_text">{{ button.name }}</span>
         </RouterLink>        
     </div>

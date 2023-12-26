@@ -70,6 +70,10 @@ button{
   margin: 10px;
   /* background-color: black; */
 }
+.logo{
+  width: 50%;
+  height: auto;
+}
 .book_container{
   display: flex;
   flex-wrap: wrap;
@@ -162,5 +166,9 @@ button{
 
   .form_container{
     width: 100%;
+  }
+  .logo{
+    width: 100%;
+    height: auto;
   }
 }

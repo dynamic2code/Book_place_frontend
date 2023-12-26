@@ -24,12 +24,11 @@
   const url = defineProps(["url"])
   import BackButtonComponent from './BackButtonComponent.vue';
   import { ref } from 'vue';
-  
   import { useRouter } from 'vue-router';
   import config from '../config';
 
   const apiUrl = `${config.baseUrl}/admin`;
-  
+  const token = localStorage.token
   const router = useRouter();
   
   const name = ref('')
@@ -42,6 +41,7 @@
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
           name: name.value,

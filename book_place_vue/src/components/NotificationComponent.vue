@@ -27,7 +27,7 @@ defineProps({
     padding: 10px;
     width: 100%;
     height: 200px;
-    /* background-color: brown; */
+    background-color: #0099ff;
     margin-top: 10px;
     margin-bottom: 10px;
     display: flex;

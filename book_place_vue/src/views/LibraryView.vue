@@ -2,7 +2,7 @@
     <HeaderComponent></HeaderComponent>
     <div class="book_container body">
       <BackButtonComponent></BackButtonComponent>
-        <BookComponent v-for="(book, index) in books" :key="index" :book="book" time="1230"></BookComponent>
+        <BookComponent :books="books" time="1230"></BookComponent>
     </div>
 </template>
 
@@ -13,7 +13,7 @@ import BackButtonComponent from '@/components/BackButtonComponent.vue';
 import BookComponent from '@/components/BookComponent.vue';
 import config from '../config';
 
-const apiUrl = `${config.baseUrl}books/`;
+const apiUrl = `${config.baseUrl}`;
 
 const books = [
   {

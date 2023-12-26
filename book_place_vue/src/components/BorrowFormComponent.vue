@@ -3,12 +3,11 @@
   <div class="body">
     <div class="form_container">
       <div class="form_brand">
-          <span class="heading2">Book Place</span>
+        <span class="heading2">Book Place</span>
       </div>
       <span class="direction">Borrow {{ book.name }}</span>
       <form @submit.prevent="borrow">
-        <input type="email" id="email" v-model="email" placeholder="Your email" required />
-        <input type="password" id="password" v-model="password" placeholder="Your password" required />
+        <input type="datetime-local" id="dueDate" v-model="dueDate" required />
         <button class="call_to_action" type="submit">Borrow</button>
       </form>
       <span class="direction">New here? Signup</span>
@@ -19,9 +18,15 @@
 <script setup>
 import BackButtonComponent from './BackButtonComponent.vue';
 import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
+import config from '../config';
+
+const apiUrl = `${config.baseUrl}`;
+const token = localStorage.token;
+const user = localStorage.user;
 
 const route = useRoute();
+const router = useRouter();
 const book = ref({
   name: '',
   category: '',
@@ -32,44 +37,53 @@ const book = ref({
 
 onMounted(async () => {
   const bookId = route.query.id;
-  // console.log('Book ID:', bookId);
   if (!bookId) {
     console.error('Book ID is undefined');
     return;
   }
 
-  // Replace the following with your actual API endpoint to fetch book details
-  const response = await fetch(`http://127.0.0.1:8000/api/v1/books/${bookId}`);
-  if (response.ok) {
-    const data = await response.json();
-    book.value = data;
-  } else {
-    console.error('Failed to fetch book details');
+  try {
+    const response = await fetch(`${apiUrl}/books/${bookId}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    if (response.ok) {
+      const {data} = await response.json();
+      book.value = data;
+    } else {
+      console.error('Failed to fetch book details');
+    }
+  } catch (error) {
+    console.error('Error fetching book details:', error);
   }
 });
 
-const email = ref('');
-const password = ref('');
+const dueDate = ref('');
+const currentDate = new Date();
+const currentTime = `${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`;
 
 const borrow = async () => {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/api/v1/books/${book.value.id}`, {
+    const response = await fetch(`${apiUrl}/book-loans`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify({
-        email: email.value,
-        password: password.value,
+        loadDate: currentTime,
+        dueDate: dueDate.value,
+        userId: user.id,
+        bookId: route.query.id
       }),
     });
 
     if (response.ok) {
-      // Handle the success scenario, e.g., redirect
       console.log('Borrow successful');
       router.push('/home');
     } else {
-      // Handle the failure scenario, e.g., display an error message
       console.error('Borrow failed:', response.statusText);
     }
   } catch (error) {
@@ -78,6 +92,7 @@ const borrow = async () => {
   }
 };
 </script>
+
 
   
   <style scoped>

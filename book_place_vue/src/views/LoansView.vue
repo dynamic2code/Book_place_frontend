@@ -15,7 +15,8 @@ import LoanComponent from '@/components/LoanComponent.vue';
 import config from '../config';
 
 const apiUrl = `${config.baseUrl}/book-loans`;
-// const apiUrl = `127.0.0.1:8000/api/v1/book-loans`
+const token = localStorage.token
+
 const loans = ref([]);
 
 console.log(loans)
@@ -23,7 +24,13 @@ console.log(loans)
 // Fetch books from the API
 const fetchBooks = async () => {
   try {
-    const response = await fetch(apiUrl);
+    const response = await fetch(apiUrl, {
+      headers: {
+        'Authorization': `Bearer ${token}`, // Include the token in the Authorization header
+        'Content-Type': 'application/json',
+        // Add other headers as needed
+      },
+    });
     const { data } = await response.json();
 
     loans.value = data;

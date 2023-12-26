@@ -25,8 +25,12 @@
   import { defineProps, ref } from 'vue';
   import BackButtonComponent from './BackButtonComponent.vue';
   import { useRouter } from 'vue-router';
-  
-  const url = defineProps(['url']);
+  import config from '../config';
+
+
+  const apiUrl = `${config.baseUrl}/users`;
+  const token = localStorage.token
+
   const router = useRouter();
   
   const name = ref('');
@@ -36,14 +40,15 @@
   
   const add_user = async () => {
     try {
-      const response = await fetch(url, {
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
           name: name.value,
-          user_address: user_address.value,
+          address: user_address.value,
           email: email.value,
           password: password.value,
         }),

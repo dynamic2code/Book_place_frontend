@@ -3,7 +3,7 @@
         <div id="header_container">
             <div>
                 <router-link to="/admin-home">
-                    <span class="heading15">Book Place</span>                
+                    <img class="logo" src="@/assets/images/bookplace.png" alt="" />            
                 </router-link>
 
             </div>

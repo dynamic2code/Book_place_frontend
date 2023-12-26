@@ -15,11 +15,20 @@ import AdminComponent from '@/components/AdminComponent.vue';
 import config from '../config';
 
 const apiUrl = `${config.baseUrl}/admin`;
+const token = localStorage.token
+
 const admins = ref([]);
 // Fetch books from the API
 const fetchAdmins = async () => {
   try {
-    const response = await fetch(apiUrl);
+    const response = await fetch(apiUrl, {
+      headers: {
+        'Authorization': `Bearer ${token}`, // Include the token in the Authorization header
+        'Content-Type': 'application/json',
+        // Add other headers as needed
+      },
+    });
+
     const { data } = await response.json();
     
     // Update the books ref with the fetched data
