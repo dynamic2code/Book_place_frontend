@@ -11,6 +11,9 @@
 import AdminHeaderComponent from '@/components/AdminHeaderComponent.vue';
 import BackButtonComponent from '@/components/BackButtonComponent.vue';
 import LoanRequestComponent from '@/components/LoanRequestComponent.vue';
+import config from '../config';
+
+const apiUrl = `${config.baseUrl}books/`;
 
 const loanRequests = [
   {

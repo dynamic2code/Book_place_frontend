@@ -8,7 +8,7 @@
         <div id="detail_holder">
             <span class="heading1">{{book.name}}</span>
             <span class="heading2">{{book.category }}</span>
-            <span class="heading2">{{book.sub_category }}</span>
+            <span class="heading2">{{book.subCategory }}</span>
             <span class="normal_text">{{book.details}}</span>
         </div>        
     </div>
@@ -20,6 +20,9 @@ import HeaderComponent from '@/components/HeaderComponent.vue';
 import BackButtonComponent from '@/components/BackButtonComponent.vue';
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
+import config from '../config';
+
+const apiUrl = `${config.baseUrl}`;
 
 const route = useRoute();
 const book = ref({
@@ -39,9 +42,10 @@ onMounted(async () => {
   }
 
   // Replace the following with your actual API endpoint to fetch book details
-  const response = await fetch(`http://127.0.0.1:8000/api/v1/books/${bookId}`);
+  const bookUrl = `${apiUrl}/books/${bookId}`;
+  const response = await fetch(bookUrl);
   if (response.ok) {
-    const data = await response.json();
+    const { data } = await response.json();
     book.value = data;
   } else {
     console.error('Failed to fetch book details');

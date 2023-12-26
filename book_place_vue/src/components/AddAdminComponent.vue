@@ -26,6 +26,9 @@
   import { ref } from 'vue';
   
   import { useRouter } from 'vue-router';
+  import config from '../config';
+
+  const apiUrl = `${config.baseUrl}/admin`;
   
   const router = useRouter();
   
@@ -35,7 +38,7 @@
   
   const add_admin = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8001/api/v1/admin', {
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -80,9 +83,7 @@
     display: flex;
     flex-direction: column;
   }
-  .form_container{
-    width: 50%;
-  }
+
   .icon{
     font-size: 1.5rem;
     display: flex;

@@ -15,6 +15,7 @@ import AdminHomeComponent from '@/components/AdminHomeComponent.vue';
 import AdminButtonComponent from '@/components/AdminButtonComponent.vue';
 
 const go_to = [
+  { route: '/loans', heading: 'Loans', details: 'View current loans' },
   { route: '/loan-request', heading: 'Loan request', details: 'View and act up on loan request' },
   { route: '/loan-extension-request', heading: 'Loan extension', details: 'Review loan extension request' },
   { route: '/returns', heading: 'Returns', details: 'Review the return request for books' },
@@ -22,6 +23,7 @@ const go_to = [
   { route: '/admin-books', heading: 'Books', details: 'View and search through all books in the library' },
   { route: '/view-admins', heading: 'Admins', details: 'View all admins and their activity' },
   { route: '/users', heading: 'Users', details: 'View and search trough all users' },
+  
 ];
 
 const buttons =[

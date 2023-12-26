@@ -12,6 +12,9 @@ import {ref} from 'vue';
 import HeaderComponent from '@/components/HeaderComponent.vue';
 import BackButtonComponent from '@/components/BackButtonComponent.vue';
 import NotificationComponent from '@/components/NotificationComponent.vue';
+import config from '../config';
+
+const apiUrl = `${config.baseUrl}books/`;
 
 const notifications=[
   {

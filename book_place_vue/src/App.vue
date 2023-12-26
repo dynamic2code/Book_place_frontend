@@ -1,5 +1,21 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const checkLocalStorage = () => {
+  const user = localStorage.getItem('user');
+  const token = localStorage.getItem('token');
+
+  if (!user || !token) {
+    // Redirect to the landing page if user or token is missing
+    router.push('/');
+  }
+};
+
+onMounted(checkLocalStorage);
 </script>
 <template>
   <router-link to="{name: '/'}"></router-link>

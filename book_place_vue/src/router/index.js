@@ -20,6 +20,7 @@ import BorrowFormView from '../views/BorrowFormView.vue'
 import AddAdminView from '../views/AddAdminView.vue'
 import AddBookView from '../views/AddBookView.vue'
 import AddUserView from '../views/AddUserView.vue'
+import LoansView from '../views/LoansView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -107,6 +108,15 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: AdminHomeView,
+    },
+
+    {
+      path: '/loans',
+      name: 'loans',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: LoansView,
     },
 
     {

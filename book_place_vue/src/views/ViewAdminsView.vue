@@ -12,13 +12,15 @@ import { ref, onMounted } from 'vue';
 import AdminHeaderComponent from '@/components/AdminHeaderComponent.vue';
 import BackButtonComponent from '@/components/BackButtonComponent.vue';
 import AdminComponent from '@/components/AdminComponent.vue';
+import config from '../config';
 
+const apiUrl = `${config.baseUrl}/admin`;
 const admins = ref([]);
 // Fetch books from the API
 const fetchAdmins = async () => {
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/v1/admin');
-    const data = await response.json();
+    const response = await fetch(apiUrl);
+    const { data } = await response.json();
     
     // Update the books ref with the fetched data
     admins.value = data;

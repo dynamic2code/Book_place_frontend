@@ -2,8 +2,8 @@
   <BackButtonComponent></BackButtonComponent>
   <div class="body">
     <div class="form_container">
-      <div class="icon">
-        <span>Book Place</span>
+      <div class="form_brand">
+          <span class="heading2">Book Place</span>
       </div>
       <span class="direction">Borrow {{ book.name }}</span>
       <form @submit.prevent="borrow">
@@ -53,7 +53,7 @@ const password = ref('');
 
 const borrow = async () => {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/api/v1/borrow/${book.value.id}`, {
+    const response = await fetch(`http://127.0.0.1:8000/api/v1/books/${book.value.id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -95,9 +95,6 @@ const borrow = async () => {
   form{
     display: flex;
     flex-direction: column;
-  }
-  .form_container{
-    width: 50%;
   }
   .icon{
     font-size: 1.5rem;

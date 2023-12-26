@@ -113,6 +113,12 @@ const navigateToAction = (action, book) => {
     justify-content: center;
     align-items: center;
   }
+
+  #book_image_holder img{
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
   
   #detail_holder {
     display: flex;

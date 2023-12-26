@@ -15,6 +15,9 @@ import BackButtonComponent from '@/components/BackButtonComponent.vue';
 import PieChartComponent from '@/components/PieChartComponent.vue';
 import BarChartComponent from '@/components/BarChartComponent.vue';
 import LineChartComponent from '@/components/LineChartComponent.vue';
+import config from '../config';
+
+const apiUrl = `${config.baseUrl}books/`;
 </script>
 
 <script scoped>

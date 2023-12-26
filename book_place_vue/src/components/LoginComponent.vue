@@ -2,9 +2,8 @@
     <BackButtonComponent></BackButtonComponent>
     <div class="body">
       <div class="form_container">
-        <div class="icon">
-          <img src="" alt="">
-          <span>Book Place</span>
+        <div class="form_brand">
+          <span class="heading2">Book Place</span>
         </div>
         <span class="direction">LOGIN</span>
         <form @submit.prevent="login">
@@ -27,9 +26,9 @@
   import BackButtonComponent from './BackButtonComponent.vue';
   import { ref, onMounted } from 'vue';
   import { useRouter } from 'vue-router';
+  // vuex implementation in the next relies
   import { useStore } from 'vuex';
 
-  const store = useStore();
   const props = defineProps({
     user: String,
   });
@@ -46,6 +45,7 @@
     url = 'http://127.0.0.1:8000/api/v1/users/login';
     route = '/home'
   }
+
 
   const router = useRouter();
   
@@ -69,7 +69,10 @@
       if (response.ok) {
         // Handle the success scenario,
         const responseData = await response.json();
-        store.dispatch('loginUser', { user: responseData.user, token: responseData.token });
+        localStorage.setItem('user', JSON.stringify(responseData.user));
+        const token = responseData.access_token;
+        localStorage.setItem('token', token);
+        console.log("response data",responseData.token)
         console.log('Login successful', responseData);
         router.push(route);
       } else {
@@ -98,9 +101,6 @@
   form{
     display: flex;
     flex-direction: column;
-  }
-  .form_container{
-    width: 50%;
   }
   .icon{
     font-size: 1.5rem;

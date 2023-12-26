@@ -11,7 +11,7 @@
 <script setup>
 import StepsComponent from '@/components/StepsComponent.vue';
 const details1 = "Create an account by visiting our offices or contact an admin"
-const details2 = "After logging in, blouse our deep catalogue and find and explore books"
+const details2 = "After logging in, browse our deep catalogue and find and explore books"
 const details3 = "On finding your book it's as simple as clicking the borrow button and on your loan being approved, we will deliver your book"
 </script>
 

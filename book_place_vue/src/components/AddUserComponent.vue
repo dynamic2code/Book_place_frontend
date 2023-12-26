@@ -81,9 +81,6 @@
     display: flex;
     flex-direction: column;
   }
-  .form_container{
-    width: 50%;
-  }
   .icon{
     font-size: 1.5rem;
     display: flex;

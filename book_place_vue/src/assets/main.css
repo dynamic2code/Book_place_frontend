@@ -136,6 +136,10 @@ button{
   align-items: center;
   /* background-color: blueviolet; */
 }
+.form_container{
+  width: 50%;
+}
+
 @media (hover: hover) {
   a:hover {
     /* background-color: blue; */
@@ -154,5 +158,9 @@ button{
     justify-content: center;
     align-items: center;
     /* background-color: blueviolet; */
+  }
+
+  .form_container{
+    width: 100%;
   }
 }

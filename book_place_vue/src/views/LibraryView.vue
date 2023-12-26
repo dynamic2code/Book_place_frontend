@@ -11,6 +11,9 @@ import {ref} from 'vue';
 import HeaderComponent from '@/components/HeaderComponent.vue';
 import BackButtonComponent from '@/components/BackButtonComponent.vue';
 import BookComponent from '@/components/BookComponent.vue';
+import config from '../config';
+
+const apiUrl = `${config.baseUrl}books/`;
 
 const books = [
   {

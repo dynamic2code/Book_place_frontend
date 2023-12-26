@@ -8,12 +8,15 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useStore } from 'vuex';
+// import { useStore } from 'vuex';
 import HeaderComponent from '@/components/HeaderComponent.vue';
 import BookComponent from '@/components/BookComponent.vue';
+import config from '../config';
 
-const store = useStore();
-const token = store.getters.getToken;
+const apiUrl = `${config.baseUrl}/books`;
+
+// const store = useStore();
+const token = localStorage.token
 
 const books = ref([]);
 
@@ -21,7 +24,7 @@ const books = ref([]);
 const fetchBooks = async () => {
   try {
     console.log(token);
-    const response = await fetch('http://127.0.0.1:8000/api/v1/books', {
+    const response = await fetch(apiUrl, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
@@ -29,7 +32,7 @@ const fetchBooks = async () => {
     });
 
     if (response.ok) {
-      const data = await response.json();
+      const { data } = await response.json();
 
       // Update the books ref with the fetched data
       books.value = data;
