@@ -3,7 +3,7 @@
     <div class="book_container body">
         <BackButtonComponent></BackButtonComponent>
         <div id="image_holder">
-            <img src="@/assets/images/book1.png" alt="">
+            <img :src=book.image alt="">
         </div>
         <div id="detail_holder">
             <span class="heading1">{{book.name}}</span>
@@ -53,7 +53,7 @@ onMounted(async () => {
 #image_holder{
     width: 100%;
     height: 400px;
-    background-color: brown;
+    background-color: #0099ff;
     margin-bottom: 10px;
     display: flex;
     align-items: center;

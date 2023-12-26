@@ -20,6 +20,7 @@ const books = ref([]);
 // Fetch books from the API
 const fetchBooks = async () => {
   try {
+    console.log(token);
     const response = await fetch('http://127.0.0.1:8000/api/v1/books', {
       headers: {
         'Content-Type': 'application/json',

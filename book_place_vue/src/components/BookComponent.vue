@@ -4,7 +4,7 @@
         <RouterLink :to="{ name: 'book', query: { id: book.id } }">
             <div id="scrollable">
                 <div id="book_image_holder">
-                    <img id="book_image" src="@/assets/images/book1.png" alt="">
+                    <img id="book_image" :src="book.image" alt="">
                 </div>
                 <div id="detail_holder" class="details">
                     <span id="name" class="heading2">{{book.name }}</span>

@@ -47,9 +47,6 @@
     route = '/home'
   }
 
-
-
-  
   const router = useRouter();
   
   const email = ref('');
@@ -70,8 +67,7 @@
       });
   
       if (response.ok) {
-        // Handle the success scenario, e.g., redirect
-        console.log(route)
+        // Handle the success scenario,
         const responseData = await response.json();
         store.dispatch('loginUser', { user: responseData.user, token: responseData.token });
         console.log('Login successful', responseData);

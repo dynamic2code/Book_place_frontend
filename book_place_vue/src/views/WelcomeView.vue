@@ -29,10 +29,10 @@ import ForthHomeComponent from '@/components/ForthHomeComponent.vue'
     <span class="heading1">How to <span style="color: #0099ff;">get an account </span>with us?</span>
   </div>
   <SecondHomeComponent></SecondHomeComponent>
-  <div class="heading">
+  <!-- <div class="heading">
     <span class="heading1">What to<span style="color: #0099ff;"> expect </span>at our Libraries</span>
   </div>
-  <ThirdHomeComponent></ThirdHomeComponent>
+  <ThirdHomeComponent></ThirdHomeComponent> -->
 
   <div class="heading">
     <span class="heading1">Steps to <span style="color: #0099ff;">unlocking our library</span>  services</span>
