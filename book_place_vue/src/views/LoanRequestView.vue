@@ -8,24 +8,41 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import AdminHeaderComponent from '@/components/AdminHeaderComponent.vue';
 import BackButtonComponent from '@/components/BackButtonComponent.vue';
 import LoanRequestComponent from '@/components/LoanRequestComponent.vue';
 import config from '../config';
 
-const apiUrl = `${config.baseUrl}books/`;
+const apiUrl = `${config.baseUrl}/book-loans`;
+const token = localStorage.token;
 
-const loanRequests = [
-  {
-    id: 1,
-    time: '2023-01-01 10:00 AM',
-    user_name: 'John Doe',
-    book_name: 'The Great Book',
-    loan_date: '2023-01-05',
-    due_date: '2023-01-15',
-  },
-  // Add more loan request objects as needed
-];
+const loanRequests = ref([])
+
+const fetchLoans = async () => {
+  try {
+    console.log(token);
+    const response = await fetch(apiUrl, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    if (response.ok) {
+      const { data } = await response.json();
+
+      // Update the books ref with the fetched data
+      loanRequests.value = data;
+    } else {
+      console.error('Request failed:', response.statusText);
+    }
+  } catch (error) {
+    console.error('Network error:', error.message);
+  }
+};
+
+onMounted(fetchLoans);
 </script>
 
 <script scoped>

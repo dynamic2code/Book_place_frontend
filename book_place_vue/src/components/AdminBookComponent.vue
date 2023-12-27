@@ -28,6 +28,10 @@ defineProps({
     books: Object
 })
 import config from '../config';
+import { useNotification } from "@kyvg/vue3-notification";
+
+
+const { notify }  = useNotification()
 
 const apiUrl = `${config.baseUrl}/books`;
 
@@ -50,12 +54,18 @@ const Delete = (requestId) => {
     if (!response.ok) {
         throw new Error(`Failed to delete book with ID ${requestId}`);
     }
-    console.log(`Book with ID ${requestId} deleted successfully.`);
-    // Optionally handle success, e.g., redirect or update UI
+    // console.log(`Book with ID ${requestId} deleted successfully.`);
+    notify({
+        title: "Success",
+        text: "Book with ID ${requestId} deleted successfully.",
+      });
     })
     .catch(error => {
-    console.error(error.message);
-    // Optionally handle errors, e.g., display an error message
+    // console.error(error.message);
+    notify({
+        title: "Fail",
+        text: error.message,
+    });
     });
 };
 

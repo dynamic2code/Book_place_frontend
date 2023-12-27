@@ -24,6 +24,9 @@ import config from '../config';
 
 const apiUrl = `${config.baseUrl}/users`;
 const token = localStorage.token;
+import { useNotification } from "@kyvg/vue3-notification";
+
+const { notify }  = useNotification()
 
 const Delete = (requestId) => {
     // Define the API endpoint for the specific book
@@ -41,8 +44,12 @@ const Delete = (requestId) => {
     if (!response.ok) {
         throw new Error(`Failed to delete user with ID ${requestId}`);
     }
-    console.log(`user with ID ${requestId} deleted successfully.`);
+    // console.log(`user with ID ${requestId} deleted successfully.`);
     location.reload();
+    notify({
+          title: "Success",
+          text: "user with ID ${requestId} deleted successfully.",
+        });
     })
     .catch(error => {
     console.error(error.message);

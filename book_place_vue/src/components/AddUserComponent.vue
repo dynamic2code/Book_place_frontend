@@ -26,7 +26,10 @@
   import BackButtonComponent from './BackButtonComponent.vue';
   import { useRouter } from 'vue-router';
   import config from '../config';
+  import { useNotification } from "@kyvg/vue3-notification";
 
+
+  const { notify }  = useNotification()
 
   const apiUrl = `${config.baseUrl}/users`;
   const token = localStorage.token
@@ -56,15 +59,27 @@
   
       if (response.ok) {
         // Handle the success scenario, e.g., redirect
-        console.log('User added successfully');
+        // console.log('User added successfully');
         router.push('/admin-home');
+        notify({
+        title: "Success",
+        text: "User added successfully!",
+      });
       } else {
         // Handle the failure scenario, e.g., display an error message
-        console.error('Failed to add user:', response.statusText);
+        // console.error('Failed to add user:', response.statusText);
+        notify({
+        title: "Fail",
+        text: "Failed to add user!",
+      });
       }
     } catch (error) {
       // Handle network errors
       console.error('Network error:', error.message);
+      notify({
+        title: "Fail",
+        text: "Network error",
+    });
     }
   };
   </script>

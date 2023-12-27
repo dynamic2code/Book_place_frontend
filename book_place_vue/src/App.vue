@@ -18,6 +18,7 @@ const checkLocalStorage = () => {
 onMounted(checkLocalStorage);
 </script>
 <template>
+  <notifications position="top center" />
   <router-link to="{name: '/'}"></router-link>
   <router-link to="{name: 'home'}"></router-link>
   <!-- <router-link to="{name: 'profile'}"></router-link> -->

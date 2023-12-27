@@ -6,7 +6,7 @@ import ForthHomeComponent from '@/components/ForthHomeComponent.vue'
 
 </script>
 <template>
-  <div class="head_fill">
+  <div class="head_fill1">
     <div id="header_container">
       <div>
         <span class="heading15">Book place</span>

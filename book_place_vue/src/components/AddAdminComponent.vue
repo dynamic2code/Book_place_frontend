@@ -23,9 +23,13 @@
   <script setup>
   const url = defineProps(["url"])
   import BackButtonComponent from './BackButtonComponent.vue';
+  import { useNotification } from "@kyvg/vue3-notification";
   import { ref } from 'vue';
   import { useRouter } from 'vue-router';
   import config from '../config';
+
+
+  const { notify }  = useNotification()
 
   const apiUrl = `${config.baseUrl}/admin`;
   const token = localStorage.token
@@ -52,12 +56,19 @@
 
       if (response.ok) {
         // Handle the success scenario, e.g., redirect
-        console.log('Admin created successfully');
         router.push('/admin-home');
+        notify({
+          title: "Success",
+          text: "Admin created successfully!",
+        });
       } else {
         // Handle the failure scenario, e.g., display an error message
         const errorData = await response.json();
         console.error('Admin creation failed:', errorData.message);
+        notify({
+          title: "Error",
+          text: "Admin creation failed:!",
+        });
       }
     } catch (error) {
       // Handle network errors

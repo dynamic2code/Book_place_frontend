@@ -3,33 +3,53 @@
 
     <div class="book_container body">
         <BackButtonComponent></BackButtonComponent>      
-        <NotificationComponent v-for="(notify, index) in notifications" :key="index" :notification="notify"></NotificationComponent>
+        <NotificationComponent  :notification="notifications"></NotificationComponent>
   </div>
 </template>
 
 <script setup>
-import {ref} from 'vue';
+import AdminHeaderComponent from '@/components/AdminHeaderComponent.vue';
+import { ref, onMounted } from 'vue';
 import BackButtonComponent from '@/components/BackButtonComponent.vue';
 import NotificationComponent from '@/components/NotificationComponent.vue';
-import AdminHeaderComponent from '@/components/AdminHeaderComponent.vue';
+import config from '../config';
 
-const notifications=[
-  {
-    time: '10:00 AM',
-    heading: 'New Message',
-    message: 'You have a new message from a friend.',
-  },
-  {
-    time: '12:30 PM',
-    heading: 'Reminder',
-    message: 'Don\'t forget to complete your tasks for the day.',
-  },
-  {
-    time: '3:45 PM',
-    heading: 'Event Tomorrow',
-    message: 'You have an event scheduled for tomorrow. Don\'t miss it!',
-  },
-]
+
+
+const token = localStorage.token;
+
+const userJsonString = localStorage.user;
+const userObject = JSON.parse(userJsonString);
+const userId = userObject.id;
+
+const apiUrl = `${config.baseUrl}/admin-notification/${userId}`;
+
+const notifications = ref([])
+
+const fetchLoans = async () => {
+  try {
+    console.log(token);
+    const response = await fetch(apiUrl, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    if (response.ok) {
+      const { data } = await response.json();
+
+      // Update the books ref with the fetched data
+      notifications.value = data;
+    } else {
+      console.error('Request failed:', response.statusText);
+    }
+  } catch (error) {
+    console.error('Network error:', error.message);
+  }
+};
+
+onMounted(fetchLoans);
 </script>
 
 <style scoped>

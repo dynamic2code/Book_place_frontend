@@ -17,13 +17,19 @@
 
 <script setup>
 import BackButtonComponent from './BackButtonComponent.vue';
+import { useNotification } from "@kyvg/vue3-notification";
 import { ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import config from '../config';
 
+const { notify }  = useNotification()
+
 const apiUrl = `${config.baseUrl}`;
 const token = localStorage.token;
-const user = localStorage.user;
+
+const userJsonString = localStorage.user;
+const userObject = JSON.parse(userJsonString);
+const userId = userObject.id;
 
 const route = useRoute();
 const router = useRouter();
@@ -75,20 +81,31 @@ const borrow = async () => {
       body: JSON.stringify({
         loadDate: currentTime,
         dueDate: dueDate.value,
-        userId: user.id,
+        userId: userId,
         bookId: route.query.id
       }),
     });
 
     if (response.ok) {
-      console.log('Borrow successful');
       router.push('/home');
+      notify({
+        title: "Success",
+        text: "Your loan request on the book has been added!",
+      });
     } else {
-      console.error('Borrow failed:', response.statusText);
+      // console.error('Borrow failed:', response.statusText);
+      notify({
+        title: "Fail",
+        text: "Borrow failed!",
+      });
     }
   } catch (error) {
     // Handle network errors
     console.error('Network error:', error.message);
+    notify({
+        title: "Fail",
+        text: "Network error",
+    });
   }
 };
 </script>

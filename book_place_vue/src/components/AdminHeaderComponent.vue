@@ -111,6 +111,7 @@ input[type="text"] {
   border: none;
   outline: none;
   flex: 1;
+  background-color: #0099ff;
 }
 .small_icon{
     height: 20px;

@@ -1,5 +1,5 @@
 <template>
-    <div id="notification_container"> 
+    <div v-for="(notification, index) in notifications" :key="index" id="notification_container"> 
         <div id="time">
             <span class="headline2">{{ notification.time }}</span>
         </div>
@@ -7,8 +7,10 @@
         <span class="normal_time">{{ notification.message }}</span>
         <div id="button_holder">
             <div id="buttons">
-                <button>Seen</button>
-                <button>Delete</button>
+                <div id="buttons">
+                    <button @click="approveRequest(loanRequest.id)">Seen</button>
+                    <button @click="rejectRequest(loanRequest.id)">Delete</button>
+                </div>
             </div>            
         </div>
 
@@ -18,7 +20,7 @@
 
 <script setup>
 defineProps({
-    notification: Object
+    notifications: Object
 })
 </script>
 
@@ -27,7 +29,7 @@ defineProps({
     padding: 10px;
     width: 100%;
     height: 200px;
-    background-color: #0099ff;
+    /* background-color: #0099ff; */
     margin-top: 10px;
     margin-bottom: 10px;
     display: flex;

@@ -7,7 +7,7 @@
                     <img id="book_image" :src="book.image" alt="">
                 </div>
                 <div id="detail_holder" class="details">  
-                    <span id="category" class="normal_text"><span id="name" class="heading2">{{book.name }}</span> in {{book.category}} category {{book.sub_category}} sub-category</span>
+                    <span id="category" class="normal_text"><span id="name" class="heading2" style="color: #0099ff;">{{book.name }}</span> in {{book.category}} category {{book.sub_category}} sub-category</span>
                 </div>            
             </div>        
         </RouterLink>
@@ -26,7 +26,10 @@
 import { useRouter } from 'vue-router';
 const router = useRouter();
 const token = localStorage.token;
+import { useNotification } from "@kyvg/vue3-notification";
 
+
+const { notify }  = useNotification()
 const userJsonString = localStorage.user;
 const userObject = JSON.parse(userJsonString);
 const userId = userObject.id;
@@ -101,14 +104,26 @@ const navigateToAction = async (action, book) => {
 
           if (response.ok) {
             // Handle the success scenario, e.g., display a success message
-            console.log('Added to Cart successfully');
+            // console.log('Added to Cart successfully');
+            notify({
+              title: "Success",
+              text: "Added to Cart successfully!",
+            });
           } else {
             // Handle the failure scenario, e.g., display an error message
-            console.error('Failed to add to Cart:', response.statusText);
+            // console.error('Failed to add to Cart:', response.statusText);
+            notify({
+                title: "Fail",
+                text: 'Failed to add to Cart:'+ response.statusText,
+            });
           }
         } catch (error) {
           // Handle network errors
-          console.error('Network error:', error.message);
+          // console.error('Network error:', error.message);
+          notify({
+              title: "Fail",
+              text: "Network error",
+          });
         }
       break;
     case 'remove':
@@ -134,6 +149,7 @@ const navigateToAction = async (action, book) => {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: 50ms;
     margin-bottom: 10px;
+    /* border: 2px solid #0099ff; */
   }
   
   #book_image_holder {
@@ -153,7 +169,7 @@ const navigateToAction = async (action, book) => {
   
   #detail_holder {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     flex-direction: column;
     overflow: hidden;

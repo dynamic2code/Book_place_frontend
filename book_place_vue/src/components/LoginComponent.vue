@@ -28,6 +28,9 @@
   import { useRouter } from 'vue-router';
   // vuex implementation in the next relies
   import { useStore } from 'vuex';
+  import { useNotification } from "@kyvg/vue3-notification";
+
+  const { notify }  = useNotification()
 
   const props = defineProps({
     user: String,
@@ -70,11 +73,19 @@
         // Handle the success scenario,
         const responseData = await response.json();
         localStorage.setItem('user', JSON.stringify(responseData.user));
+
         const token = responseData.access_token;
         localStorage.setItem('token', token);
-        console.log("response data",responseData.token)
-        console.log('Login successful', responseData);
+
+        // console.log("response data",responseData.token)
+
+        // console.log('Login successful', responseData);
+
         router.push(route);
+        notify({
+          title: "Success",
+          text: "Login successful!",
+        });
       } else {
         // Handle the failure scenario, e.g., display an error message
         console.error('Login failed:', response.statusText);

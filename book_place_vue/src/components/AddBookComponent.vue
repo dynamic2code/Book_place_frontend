@@ -36,6 +36,9 @@ import BackButtonComponent from './BackButtonComponent.vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import config from '../config';
+import { useNotification } from "@kyvg/vue3-notification";
+
+const { notify }  = useNotification()
 
 const apiUrl = `${config.baseUrl}/books`;
 const token = localStorage.token
@@ -81,13 +84,25 @@ const addBook = async () => {
       // Handle the success scenario, e.g., redirect
       console.log('Book added successfully');
       router.push('/admin-home');
+      notify({
+        title: "Success",
+        text: "Book added successfully!",
+      });
     } else {
       // Handle the failure scenario, e.g., display an error message
       console.error('Failed to add book:', response.statusText);
+      notify({
+        title: "Fail",
+        text: "Failed to add book:!",
+      });
     }
   } catch (error) {
     // Handle network errors
     console.error('Network error:', error.message);
+    notify({
+        title: "Fail",
+        text: "Network error:!",
+      });
   }
 };
 

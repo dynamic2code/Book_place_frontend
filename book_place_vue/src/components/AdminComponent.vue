@@ -24,6 +24,10 @@ import config from '../config';
 
 const apiUrl = `${config.baseUrl}/admin`;
 const token = localStorage.token;
+import { useNotification } from "@kyvg/vue3-notification";
+
+
+const { notify }  = useNotification()
 
 const Delete = (requestId) => {
     const deleteUrl = `${apiUrl}/${requestId}`;
@@ -40,11 +44,19 @@ const Delete = (requestId) => {
     if (!response.ok) {
         throw new Error(`Failed to delete admin with ID ${requestId}`);
     }
-    console.log(`admin with ID ${requestId} deleted successfully.`);
+    // console.log(`admin with ID ${requestId} deleted successfully.`);
     location.reload();
+    notify({
+        title: "Success",
+        text: "admin with ID ${requestId} deleted successfully.!",
+      });
     })
     .catch(error => {
     console.error(error.message);
+    notify({
+        title: "Fail",
+        text: error.message,
+    });
     });
 };
 

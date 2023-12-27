@@ -1,10 +1,8 @@
 <template>
     <div  v-for="(loan, index) in loans" :key="index" id="notification_container"> 
-        <div id="time">
-            <span class="headline2">Request at {{ loan.time }} from {{ loan.user_name }}</span>
-        </div>
-        <span class="heading2">{{ loan.book_name }}</span>
-        <span class="normal_time"> from {{ loan.loan_date }}to {{ loan.due_date }}</span>
+        <span class="heading2">Loan id: {{ loan.id }}</span>
+        <span class="normal_text">Loaned at: {{ loan.loanDate }}</span>
+        <span class="normal_text">Due at: {{ loan.dueDate}}</span>
         <!-- <div id="button_holder">
             <div id="buttons">
                 <button @click="approveRequest(loan.id)">Approve</button>
