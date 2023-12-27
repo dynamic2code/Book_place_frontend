@@ -29,8 +29,10 @@
   // vuex implementation in the next relies
   import { useStore } from 'vuex';
   import { useNotification } from "@kyvg/vue3-notification";
+  import config from '../config';
 
   const { notify }  = useNotification()
+  const apiUrl = `${config.baseUrl}`;
 
   const props = defineProps({
     user: String,
@@ -42,10 +44,10 @@
   let route;
 
   if (props.user === 'admin') {
-    url = 'http://127.0.0.1:8000/api/v1/admin/login';
+    url = `${apiUrl}/admin/login`;
     route ='/admin-home'
   } else {
-    url = 'http://127.0.0.1:8000/api/v1/users/login';
+    url = `${apiUrl}/users/login`;
     route = '/home'
   }
 
