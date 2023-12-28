@@ -50,6 +50,3 @@ List any prerequisites or dependencies that need to be installed before running 
   ```bash
   npm install
   npm run serve
-
-3
-   
